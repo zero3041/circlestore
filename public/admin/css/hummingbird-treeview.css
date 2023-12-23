@@ -1,0 +1,48 @@
+#treeview,
+#treeview *
+{
+    list-style: none;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+#treeview label {
+    font-weight: normal;
+    cursor: pointer;
+}
+
+
+#treeview input[type=checkbox] {
+    width : 16px;
+    height :16px;
+    padding: 0px;
+    margin: 0px;
+}
+#treeview input[type=radio] {
+    width : 16px;
+    height :16px;
+    padding: 0px;
+    margin: 0px;
+}
+
+#treeview ul:not(.hummingbird-base) {
+    display: none;
+}
+
+#treeview .fa {
+    font-style: normal;
+    cursor: pointer;
+    font-weight: normal !important;
+    /*color: #A1A1A1;*/
+}
+
+#treeview .fas {
+    font-style: normal;
+    cursor: pointer;
+    font-weight: normal !important;
+}
+
+.hummingbird-base {
+    white-space:nowrap;
+}
+

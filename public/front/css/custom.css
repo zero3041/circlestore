@@ -1,0 +1,49 @@
+.btn-custom{
+	background: #AD0800;
+    border: none;
+    border: 1px solid #AD0800;
+    margin: 0px;
+    color: #fff;
+    transition: color 300ms ease-in-out 0s, background-color 300ms ease-in-out 0s, background-position 300ms ease-in-out 0s;
+}
+.btn-custom:hover{
+	background-color: #7A0202;
+	border: 1px solid #7A0202;
+}
+.paginate-order nav{
+	background: none !important;
+}
+.paginate-order .active>span{
+	background: #ad0800;
+	border-color: #ad0800;
+}
+.recent-orders{
+	padding-top: 20px;
+}
+.search nav{
+	background: none !important;
+}
+.header-service {
+	padding: 0px !important;
+}
+.symbol {
+  display: inline-block;
+  border-radius: 50%;
+  border: 5px double white;
+  width: 30px;
+  height: 30px;
+}
+
+.symbol-empty {
+  background-color: #ccc;
+}
+
+.symbol-filled {
+  background-color: black;
+}
+.glyphicon-star{
+	color: #FFC60A;
+}
+.link-wishlist{
+    cursor: pointer;
+}
