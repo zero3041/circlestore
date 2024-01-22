@@ -215,7 +215,7 @@ deleteImage = (_this) => {
         return true;
 	}
 	action = $('.getAPI').val();
-	action = action + 'admin/product/delete-image';
+	action = action + 'admins/product/delete-image';
 	$.ajax({
         type: 'POST',
         url: action,
@@ -260,7 +260,7 @@ deleteProductParam = (_this, check = 0) => {
 	feature = parseInt($(_this).parents('.product-param-selected').find('.feature').val());
 	id_product =parseInt($('.productID').val());
 	action = $('.getAPI').val();
-	action = action + 'admin/product/delete-feature';
+	action = action + 'admins/product/delete-feature';
 	$.ajax({
         type: 'POST',
         url: action,
@@ -289,7 +289,7 @@ deleteProductParam = (_this, check = 0) => {
 getFeatureValue = (_this) => {
 	id_feature = $(_this).val();
 	action = $('.getAPI').val();
-	action = action + 'admin/feature/get-feature-value';
+	action = action + 'admins/feature/get-feature-value';
 	$.ajax({
         type: 'POST',
         url: action,

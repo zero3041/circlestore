@@ -1,5 +1,5 @@
   @extends('admin.layout.layout')
- 
+
   @section('content')
 
 	    <!-- Content Header (Page header) -->
@@ -35,7 +35,7 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <table class="table table-bordered">
-                  <thead>                  
+                  <thead>
                     <tr>
                       <th style="width: 20px">Số hóa đơn</th>
                       <th>Tên khách hàng</th>
@@ -65,20 +65,20 @@
                       </td>
                     </tr>
                     @endforeach
-                    
+
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
                 <div class="float-right">
-                  {{$order->links()}}
+                  {{$order->links('pagination::bootstrap-4')}}
                 </div>
               </div>
             </div>
             <!-- /.card -->
 	    <!-- /.content -->
 
-	            
-   
+
+
   @endsection

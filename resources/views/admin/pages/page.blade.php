@@ -1,8 +1,8 @@
   @extends('admin.layout.layout')
- 
+
   @section('content')
     @csrf
-    
+
 	    <!-- Content Header (Page header) -->
 	    <div class="content-header">
 	      <div class="container-fluid">
@@ -36,7 +36,7 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <table class="table table-bordered">
-                  <thead>                  
+                  <thead>
                     <tr>
                       <th style="width: 10px">ID</th>
                       <th>Tiêu đề</th>
@@ -65,20 +65,20 @@
                       </td>
                     </tr>
                     @endforeach
-                    
+
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
                 <div class="float-right">
-                  {{$page->links()}}
+                  {{$page->links('pagination::bootstrap-4')}}
                 </div>
               </div>
             </div>
             <!-- /.card -->
 	    <!-- /.content -->
 
-	            
-   
+
+
   @endsection

@@ -1,5 +1,5 @@
    @extends('admin.layout.layout')
- 
+
   @section('content')
   <!-- Content Header (Page header) -->
       <div class="content-header">
@@ -29,12 +29,12 @@
           @endif
         </div><!-- /.container-fluid -->
       </div>
-      <!-- /.content-header -->   
+      <!-- /.content-header -->
     <!-- Main content -->
     <section class="content">
       <form class="form-horizontal" action="@isset($order){{route('editOrder',['id'=>$order['id_order']])}} @endisset" method="post">
         @csrf
-        
+
       <div class="row">
         <div class="col-md-6">
           <div class="card card-info">
@@ -173,7 +173,7 @@
                         <td>{{number_format($value->price, 2)}} VND</td>
                         <td>{{number_format($value->total_price_product, 2)}} VND</td>
                       </tr>
-                    @endforeach  
+                    @endforeach
                   @endisset
                 </tbody>
               </table>
@@ -198,7 +198,7 @@
               <div class="alert alert-warning alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                   <h5><i class="icon fas fa-exclamation-triangle"></i> Lưu ý</h5>
-                  Nếu bạn đã sửa hóa đơn thì phải cập nhật hóa đơn rồi mới in hoặc xuất hóa đơn. 
+                  Nếu bạn đã sửa hóa đơn thì phải cập nhật hóa đơn rồi mới in hoặc xuất hóa đơn.
               </div>
               <div class="form-group row">
                 <div class="col-sm-4">
@@ -262,7 +262,7 @@
 </form>
     </section>
     <!-- /.content -->
-    
+
 
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -272,7 +272,7 @@
 
     <div class="toolbar hidden-print">
 
-  
+
     </div>
     <div class="invoice overflow-auto">
         <div style="min-width: 600px">
@@ -280,22 +280,22 @@
                 <div class="row">
                     <div class="col">
                         <a target="_blank" href="{{ asset('/') }}">
-                            <img src="@isset ($shopValue['logo']) 
+                            <img src="@isset ($shopValue['logo'])
           {{ asset('upload/configuration/home/'.$shopValue['logo']) }}@endisset" data-holder-rendered="true" />
                             </a>
                     </div>
                     <div class="col company-details">
                         <h2 class="name">
                             <a target="_blank" href="{{ asset('/') }}">
-                            @isset ($shopValue['shopName']) 
+                            @isset ($shopValue['shopName'])
           {{ $shopValue['shopName'] }}@endisset
                             </a>
                         </h2>
-                        <div>@isset ($shopValue['address']) 
+                        <div>@isset ($shopValue['address'])
           {{ $shopValue['address'] }}@endisset</div>
-                        <div>@isset ($shopValue['phone']) 
+                        <div>@isset ($shopValue['phone'])
           {{ $shopValue['phone'] }}@endisset</div>
-                        <div>@isset ($shopValue['email']) 
+                        <div>@isset ($shopValue['email'])
           {{ $shopValue['email'] }}@endisset</div>
                     </div>
                 </div>
@@ -354,14 +354,14 @@
                         </tr>
                     </tfoot>
                 </table>
-                
+
                 <div class="notices">
                     <div>Ghi chú:</div>
                     <div class="notice"></div>
                 </div>
             </main>
             <footer>
-                Cảm ơn quý khách đã mua hàng tại {{$shopValue['shopName']}}
+{{--                Cảm ơn quý khách đã mua hàng tại {{$shopValue['shopName']}}--}}
             </footer>
         </div>
         <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
@@ -376,7 +376,7 @@
 
     <div class="toolbar hidden-print">
 
-  
+
     </div>
     <div class="invoice overflow-auto">
         <div style="min-width: 600px">
@@ -384,22 +384,22 @@
                 <div class="row">
                     <div class="col">
                         <a target="_blank" href="https://lobianijs.com">
-                            <img src="@isset ($shopValue['logo']) 
+                            <img src="@isset ($shopValue['logo'])
           {{ asset('upload/configuration/home/'.$shopValue['logo']) }}@endisset" data-holder-rendered="true" />
                             </a>
                     </div>
                     <div class="col company-details">
                         <h2 class="name">
                             <a target="_blank" href="https://lobianijs.com">
-                            @isset ($shopValue['shopName']) 
+                            @isset ($shopValue['shopName'])
           {{ $shopValue['shopName'] }}@endisset
                             </a>
                         </h2>
-                        <div>@isset ($shopValue['address']) 
+                        <div>@isset ($shopValue['address'])
           {{ $shopValue['address'] }}@endisset</div>
-                        <div>@isset ($shopValue['phone']) 
+                        <div>@isset ($shopValue['phone'])
           {{ $shopValue['phone'] }}@endisset</div>
-                        <div>@isset ($shopValue['email']) 
+                        <div>@isset ($shopValue['email'])
           {{ $shopValue['email'] }}@endisset</div>
                     </div>
                 </div>
@@ -465,7 +465,7 @@
                 </div>
             </main>
             <footer>
-                Cảm ơn quý khách đã mua hàng tại {{$shopValue['shopName']}}
+{{--                Cảm ơn quý khách đã mua hàng tại {{$shopValue['shopName']}}--}}
             </footer>
         </div>
         <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->

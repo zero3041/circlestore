@@ -7,6 +7,16 @@
                 <div class="checkout ">
                     <div class="item left styled">
                         <h1>Đăng Ký</h1>
+                        @if(session('status'))
+                            <p class="login-box-msg" style="color:#C82333">{{session('status')}}</p>
+                        @endif
+                        @if($errors->any())
+                            <p class="login-box-msg">
+                            @foreach ($errors->all() as $err)
+                                <div class="login-box-msg" style="color:#C82333">{{$err}}</div>
+                                @endforeach
+                                </p>
+                                @endif
                         <form method="post" action="{{ route('register') }}">
                             @csrf
                             <P>

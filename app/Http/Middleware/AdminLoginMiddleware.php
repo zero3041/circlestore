@@ -17,7 +17,7 @@ class AdminLoginMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::check()){
-            return redirect()->route('adminDashboard');
+            return redirect()->route('adminlogin');
         }
         return $next($request);
     }

@@ -71,7 +71,7 @@
               <!-- /.card-body -->
               <div class="card-footer clearfix">
                 <div class="float-right">
-              	 {{$attrbuteGroup->onEachSide(3)->links()}}
+              	 {{$attrbuteGroup->onEachSide(3)->links('pagination::bootstrap-4')}}
                 </div>
               </div>
             </div>

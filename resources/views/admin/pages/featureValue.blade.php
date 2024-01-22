@@ -1,5 +1,5 @@
   @extends('admin.layout.layout')
- 
+
   @section('content')
 
 	    <!-- Content Header (Page header) -->
@@ -31,14 +31,14 @@
                   </div>
                   <div class="float-right" style="padding-right: 10px;">
                     <a class="btn btn-block btn-secondary" href="{{ route('adminFeature') }}"><i class="fa fa-arrow-circle-left"></i> Trở về danh sách</a>
-                  </div> 
+                  </div>
                   </div>
                 </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table class="table table-bordered">
-                  <thead>                  
+                  <thead>
                     <tr>
                       <th style="width: 10px">ID</th>
                       <th>Thông số sản phẩm</th>
@@ -61,20 +61,20 @@
                       </td>
                     </tr>
                     @endforeach
-                    
+
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
                 <div class="float-right">
-                  {{$featureValue->links()}}
+                  {{$featureValue->links('pagination::bootstrap-4')}}
                 </div>
               </div>
             </div>
             <!-- /.card -->
 	    <!-- /.content -->
 
-	            
-   
+
+
   @endsection

@@ -1,6 +1,7 @@
 @extends('web.layout.layout')
 
 @section('content')
+
     @include('web.partials.mainSlider')
     <!-- slider -->
     @include('web.partials.mainBrands')
@@ -9,6 +10,6 @@
     <!-- trending -->
     @include('web.partials.mainFeatures')
     <!-- Features -->
-    @include('web.partials.mainBanners')
+{{--    @include('web.partials.mainBanners')--}}
     <!-- Banner -->
 @endsection

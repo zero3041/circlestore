@@ -6,13 +6,32 @@ use App\Http\Controllers\Controller;
 use App\Mail\sendMailRegister;
 use App\Mail\sendMailResetPassword;
 use App\Models\Customer;
+use App\Models\Customer_wishlist;
+use App\Models\Product;
+use App\Models\Product_image;
+use App\Models\Review;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class CustomerController extends Controller
 {
+    public function account()
+    {
+        $customer = Auth::guard('customer')->user();
+        return view('web.pages.account')->with([
+            'customer' => $customer,
+        ]);
+    }
+    public function postAccount(Request $request, $id)
+    {
+        $this->postEditAccount($request,$check = 'front', $id);
+        $customer = Auth::guard('customer')->user();
+        return redirect()->route('account',['id'=>$customer['id_customer']])->with('status','Cập nhật thông tin thành công');
+    }
     public function index()
     {
         $category = CategoryController::getMenuByname('laptop');
@@ -118,8 +137,101 @@ class CustomerController extends Controller
     public function wishlist()
     {
         $category = CategoryController::getMenuByname('laptop');
+
+        $customer = Auth::guard('customer')->user()->toArray();
+        $id_customer = $customer['id_customer'];
+        $product = DB::table('product')->when($id_customer, function($query, $id_customer){
+            return $query
+                ->join('customer_wishlists','product.id_product','=','customer_wishlists.id_product')
+                ->where('customer_wishlists.id_customer', $id_customer);
+        })  ->where('product.active', 1)
+            ->paginate(10);
+        foreach($product as $key => $value){
+            $image = Product_image::where('cover', 1)->where('id_product', $value->id_product)->first();
+            $product[$key]->image = 'upload/product/home/'.$image->url;
+        }
         return view('web.pages.wishlist',with([
-            'category' => $category
+            'category' => $category,
+            'product' => $product
         ]));
+    }
+    public function addWishList(Request $request)
+    {
+        $customerId = Auth::guard('customer')->user()->id_customer;
+//        dd($customerId);
+        $productId = $request->input('product_id');
+        $wishlistCount = Customer_wishlist::where('id_customer', $customerId)->count();
+        $existingWishlistItem = Customer_wishlist::where('id_customer', $customerId)
+            ->where('id_product', $productId)
+            ->first();
+        if ($existingWishlistItem) {
+            return response()
+                ->json([
+                    'status' => 'error',
+                    'message' => 'Sản phẩm đã tồn tại trong danh sách yêu thích.'
+                ]);
+        }
+        Customer_wishlist::create([
+            'id_customer' => $customerId,
+            'id_product' => $productId,
+        ]);
+        return response()->json([
+            'status' => 'success',
+            'data' => $wishlistCount,
+            'message' => 'Sản phẩm đã được thêm vào danh sách yêu thích.'
+        ]);
+    }
+    public function removeWishlist($id_product)
+    {
+
+        $product = Product::find($id_product);
+
+        if($product != null){
+            $id_customer = Auth::guard('customer')->user()->id_customer;
+            $productWishlist = Customer_wishlist::where('id_product', $id_product)->where('id_customer', $id_customer)->first();
+            if($productWishlist){
+                $productWishlist->delete();
+                $total = Customer_wishlist::where('id_customer', $id_customer)->count();
+                return redirect()->route('wishlist');
+            }else{
+                return response()->json([
+                    'error'    => true,
+                    'messages' => 'Sản phẩm chưa được thêm vào danh sách yêu thích của bạn',
+                ], 206);
+            }
+        }
+        else{
+            return response()->json([
+                'error'    => true,
+                'messages' => 'Sản phẩm không tồn tại',
+                'product' => null,
+            ], 206);
+        }
+
+    }
+    public function review(Request $request, $id)
+    {
+        $request->validate([
+            'comment' => 'required|max:200',
+            'rating' => 'required|integer',
+        ],[
+            'comment.required' => 'Vui lòng nhập bình luận',
+            'comment.max' => 'Bình luận không quá 200 kí tự',
+            'rating.required' => 'Vui lòng chọn đánh giá',
+            'rating.integer' => 'Đánh giá không đúng định dạng',
+        ]);
+        $id_customer = Auth::guard('customer')->user()->id_customer;
+        $review = new Review;
+        $review->id_product = $id;
+        $review->id_customer = $id_customer;
+        if($request->rating<=0||$request->rating>5){
+            // dd($request->rating);
+            return redirect()->route('productDetail',['id'=>$id])
+                ->withErrors(['review'=>'Đánh giá không đúng định dạng']);
+        }
+        $review->vote = $request->rating;
+        $review->content = $request->comment;
+        $review->save();
+        return redirect()->route('productDetail',['id'=>$id])->with('status','Đánh giá thành công');
     }
 }

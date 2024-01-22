@@ -1,5 +1,5 @@
   @extends('admin.layout.layout')
- 
+
   @section('content')
 
 	    <!-- Content Header (Page header) -->
@@ -35,7 +35,7 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <table class="table table-bordered">
-                  <thead>                  
+                  <thead>
                     <tr>
                       <th style="width: 10px">ID</th>
                       <th style="width: 150px">Ảnh</th>
@@ -63,20 +63,20 @@
                       </td>
                     </tr>
                     @endforeach
-                    
+
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
                 <div class="float-right">
-                  {{$slide->links()}}
+                  {{$slide->links('pagination::bootstrap-4')}}
                 </div>
               </div>
             </div>
             <!-- /.card -->
 	    <!-- /.content -->
 
-	            
-   
+
+
   @endsection

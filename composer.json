@@ -6,13 +6,17 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "barryvdh/laravel-dompdf": "^2.0",
+        "chartisan/chartisan": "*",
         "ckfinder/ckfinder-laravel-package": "^4.0",
+        "consoletvs/charts": "6.*",
         "guzzlehttp/guzzle": "^7.2",
         "illuminate/support": "*",
         "intervention/image": "^2.7",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
-        "laravel/tinker": "^2.8"
+        "laravel/tinker": "^2.8",
+        "mindscms/laravelshoppingcart": "^2.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",

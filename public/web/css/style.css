@@ -763,7 +763,7 @@ form.search button:hover {
 .products .rating {
     display: flex;
     align-items: center;
-    gap: 0.5em;
+    /*gap: 0.5em;*/
 }
 .products .rating .stars {
     width: 80px;
@@ -772,6 +772,22 @@ form.search button:hover {
     background-position-y: top;
     background-repeat-y: no-repeat;
 }
+
+.rating-box {
+    width: 76px;
+    height: 15px;
+    font-size: 0;
+    line-height: 0;
+    background: url(../images/bkg_rating.png) 0 0 repeat-x;
+    text-indent: -999em;
+    overflow: hidden;
+}
+.rating-box .rating {
+    float: left;
+    height: 16px;
+    background: url(../images/bkg_rating.png) 0 100% repeat-x;
+}
+
 /* ---- */
 .products .item:where(:nth-child(3),:nth-child(3)) .stars{
     width: 64px;

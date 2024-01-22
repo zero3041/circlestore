@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ImageController;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AdminCategoryController extends Controller
 {
@@ -194,7 +196,7 @@ class AdminCategoryController extends Controller
         $category = array();
         for($i=1;$i<=4;$i++){
             $level = 'level'.$i;
-            if(Category::where('level',$i)->get()!=null){
+            if(Category::where('level',$i)->get()!==null){
                 $category[$level] = Category::where('level',$i)->get()->toArray();
             }
             else{

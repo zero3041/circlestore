@@ -1,0 +1,138 @@
+@extends('admin.layout.layout')
+
+@section('content')
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Thêm mã giảm giá</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ route('adminDashboard') }}">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Mã giảm giá</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $err)
+                        <div class="">{{$err}}</div>
+                    @endforeach
+                </div>
+            @endif
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Horizontal Form -->
+    <div class="card card-info">
+        <div class="card-header">
+            <h3 class="card-title">Thêm mã giảm giá mới</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form class="form-horizontal saveProduct" action=" @isset($voucher) {{ route('postEditVoucher',['id'=>$voucher['id']]) }} @endisset @empty($voucher) {{route('postAddAdminVoucher')}}  @endempty " method="post" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="getAPI" class="getAPI" value="{{ asset('') }}">
+            <input type="hidden" name="product" class="productID" value="">
+            <div class="card-body">
+                <div class="row mt-4" style="margin-top: 0px !important">
+                    <nav class="w-100">
+                        <div class="nav nav-tabs" id="product-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Cài đặt cơ bản</a>
+                            <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating" role="tab" aria-controls="product-rating" aria-selected="false">Danh mục</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content p-3" id="nav-tabContent" style="width: 100%">
+                        <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab">
+                            <div class="form-group row">
+                                <div class="col-lg-12">
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Tên mã giảm giá</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="name" value="@isset($voucher) {{$voucher['name']}}  @endisset" class="form-control" id="inputEmail3" placeholder="Tên sản phẩm" required="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Mã giảm giá</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="code" value="@isset($voucher) {{$voucher['code']}}  @endisset" class="form-control" id="inputCode" placeholder="Nhập mã giảm giá" required="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Giảm giá (%)</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" name="discount" value="@isset($voucher){{$voucher['discount']}}@endisset" class="form-control" id="inputDiscount" placeholder="Nhập % giảm giá" required="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Điều kiện sử dụng</label>
+                                        <div class="col-sm-10">
+                                            <textarea name="condition" value="@isset($voucher){{$voucher['condition']}}@endisset" class="form-control" id="inputCondition" placeholder="Điều kiện sử dụng (nếu có)">@isset($voucher){{$voucher['condition']}}@endisset</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Ngày bắt đầu</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" name="start_date" value="@isset($voucher){{$voucher['start_date']}}@endisset" class="form-control" id="inputStartDate" required="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Ngày kết thúc</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" name="end_date" value="@isset($voucher){{$voucher['end_date']}}@endisset" class="form-control" id="inputEndDate" required="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Số lượng</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" name="quantity" value="@isset($voucher){{$voucher['quantity']}}@endisset" class="form-control" id="inputQuantity" placeholder="Số lượng mã giảm giá" required="">
+                                        </div>
+                                    </div>
+
+{{--                                    <div class="form-group row">--}}
+{{--                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Trạng thái</label>--}}
+{{--                                        <div class="col-sm-10">--}}
+{{--                                            <select name="status" class="form-control" id="inputStatus">--}}
+{{--                                                <option value="active">Active</option>--}}
+{{--                                                <option value="inactive">Inactive</option>--}}
+{{--                                                <option value="expired">Expired</option>--}}
+{{--                                            </select>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+
+{{--                                    <div class="form-group row">--}}
+{{--                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Lượt sử dụng</label>--}}
+{{--                                        <div class="col-sm-10">--}}
+{{--                                            <input type="number" name="used_count" value="0" class="form-control" id="inputUsedCount" >--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Sản phẩm thuộc danh mục</label>
+                                <div class="col-sm-10">
+                                    @include('admin.partials.categoryTree')
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <a type="submit" class="btn btn-default" href="">Cancel</a>
+                <button type="submit" class="btn btn-info float-right">Lưu</button>
+
+            </div>
+            <!-- /.card-footer -->
+        </form>
+    </div>
+    <!-- /.card -->
+@endsection

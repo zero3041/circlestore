@@ -1,5 +1,5 @@
   @extends('admin.layout.layout')
- 
+
   @section('content')
 
 	    <!-- Content Header (Page header) -->
@@ -32,14 +32,14 @@
                     {{-- <div class="float-right" style="padding-right: 10px;">
                     <a class="btn btn-block btn-info" href="{{ route('addProduct') }}"><i class="fas fa-plus-circle"></i> Thêm mới thuộc tính</a>
                   </div> --}}
-                  
+
                   </div>
                 </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table class="table table-bordered">
-                  <thead>                  
+                  <thead>
                     <tr>
                       <th style="width: 10px">ID</th>
                       <th>Hình ảnh</th>
@@ -70,20 +70,20 @@
                       </td>
                     </tr>
                     @endforeach
-                    
+
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
                 <div class="float-right">
-              	 {{$product->onEachSide(3)->links()}}
+              	 {{$product->onEachSide(3)->links('pagination::bootstrap-4')}}
                 </div>
               </div>
             </div>
             <!-- /.card -->
 	    <!-- /.content -->
 
-	            
-   
+
+
   @endsection

@@ -1,8 +1,8 @@
   @extends('admin.layout.layout')
- 
+
   @section('content')
       @csrf
-      
+
 	    <!-- Content Header (Page header) -->
 	    <div class="content-header">
 	      <div class="container-fluid">
@@ -36,14 +36,14 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <table class="table table-bordered">
-                  <thead>                  
+                  <thead>
                     <tr>
                       <th style="width: 10px">ID</th>
 {{--                      <th style="width: 150px">Ảnh</th>--}}
                       <th>Tên danh mục</th>
                       <th>Hiển thị sản phẩm ở trang chủ</th>
                       <th>Tình trạng</th>
-                     
+
                     </tr>
                   </thead>
                   <tbody>
@@ -59,23 +59,23 @@
                         </div>
                       </td>
                       <td>{!!$value['active']!!}</td>
-                      
+
                     </tr>
                     @endforeach
-                    
+
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
                 <div class="float-right">
-                  {{$category->links()}}
+                  {{$category->links('pagination::bootstrap-4')}}
                 </div>
               </div>
             </div>
             <!-- /.card -->
 	    <!-- /.content -->
 
-	            
-   
+
+
   @endsection

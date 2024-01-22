@@ -30,7 +30,9 @@
   <link rel="stylesheet" href="{{ asset('admin/css/jquery-ui.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/css/hummingbird-treeview.css') }}">
   <script src="{{ asset('ckeditor/ckeditor.js')}}"></script>
+    <script src="{{ asset('https://cdn.jsdelivr.net/npm/chart.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
+
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -214,9 +216,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
+                <a href="{{ route('AdminVoucher') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Giảm giá</p>
+                </a>
+              </li>
+                <li class="nav-item">
+                <a href="{{ route('AdminFlashSale') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Flash Sale</p>
                 </a>
               </li>
             </ul>
@@ -426,5 +434,6 @@
 <script src="{{ asset('admin/js/jscolor.js')}}"></script>
 <script src="{{ asset('admin/js/hummingbird-treeview.js')}}"></script>
 <script src="{{ asset('admin/js/custom.js')}}"></script>
+
 </body>
 </html>

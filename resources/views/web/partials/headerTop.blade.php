@@ -4,8 +4,8 @@
             <div class="left">
                 <ul class="flexitem main-links">
 {{--                    <li><a href="">Blog</a></li>--}}
-                    <li><a href="">Sản Phẩm Nổi Bật</a></li>
-                    <li><a href="">Danh Sách Yêu Thích</a></li>
+{{--                    <li><a href="">Sản Phẩm Nổi Bật</a></li>--}}
+                    <li><a href="{{ route('wishlist') }}">Danh Sách Yêu Thích</a></li>
                 </ul>
             </div>
             <div class="right">
@@ -19,8 +19,8 @@
                         @endif
 
                     </li>
-                    <li><a href="#">Tài Khoản</a></li>
-                    <li><a href="#">Theo Dõi Đơn Hàng</a></li>
+                    <li><a href="{{route('account')}}">Tài Khoản</a></li>
+                    <li><a href="{{ route('orderCustomer') }}">Theo Dõi Đơn Hàng</a></li>
                     <li>
                         <a href="#">VNĐ <span class="icon-small"><i class="ri-arrow-down-s-line"></i></span></a>
                         <ul>

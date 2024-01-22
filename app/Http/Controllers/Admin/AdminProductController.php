@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\Product_image;
 use App\Models\Tax;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AdminProductController extends Controller
 {
@@ -421,6 +422,7 @@ class AdminProductController extends Controller
             }
 
         }
+        return redirect()->route('adminProduct');
     }
     public function deleteProduct(Request $request, $id)
     {

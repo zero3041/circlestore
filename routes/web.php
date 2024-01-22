@@ -16,10 +16,18 @@ use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\AdminSlideController;
 use App\Http\Controllers\Admin\AdminTaxController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\admin\AdminVoucherController;
+use App\Http\Controllers\admin\FlashSaleController;
+use App\Http\Controllers\admin\StatisticController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\web\AuthController;
 use App\Http\Controllers\web\CartController;
+use App\Http\Controllers\web\CategoryController;
 use App\Http\Controllers\web\CustomerController;
 use App\Http\Controllers\web\LayoutController;
+use App\Http\Controllers\web\ManufacturerController;
+use App\Http\Controllers\web\OrderController;
+use App\Http\Controllers\web\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,9 +42,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [LayoutController::class, 'index'])->name('index');
+Route::get('/search', [LayoutController::class, 'search'])->name('search');
 Route::get('/login', [CustomerController::class, 'index'])->name('login');
 Route::get('/register', [CustomerController::class, 'register'])->name('register');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::get('/updateCart', [CartController::class, 'updateCart'])->name('updateCart');
+Route::post('/cart/{id}', [CartController::class, 'addToCart'])->name('addToCart');
+Route::get('/cart/remove/{rowId}', [CartController::class, 'removeFromCart'])->name('removeToCart');
+Route::get('/product-detail/{id}', [ProductController::class, 'productDetail'])->name('productDetail');
+Route::get('/manufacturer/{id}',[ManufacturerController::class,'getProductManufacturer'])->name('getProductManufacturer');
+Route::post('/order',[OrderController::class,'order'])->name('order');
+Route::get('/invoice/{id}',[PDFController::class,'index'])->name('pdf');
+Route::post('/applyVoucher',[AdminVoucherController::class, 'applyDiscount'])->name('applyDiscount');
+
+
+Route::group(['prefix' => 'category'], function () {
+    Route::get('/{id}', [CategoryController::class,'getProductCategory'])->name('category');
+    Route::get('/{id}/sort/{sortType}', [CategoryController::class, 'sortCategory'])->name('sortCategory');
+});
 
 Route::group(['middleware' => ['customerLogin']], function () {
     Route::get('/login', [AuthController::class,'login'])->name('login');
@@ -52,7 +75,19 @@ Route::group(['middleware' => ['customerLogin']], function () {
 
 Route::group(['middleware' => 'customerAuth'], function () {
     Route::get('/logout', [AuthController::class,'logout'])->name('logout');
-    Route::get('/wishlist', [CustomerController::class,'wishlist'])->name('wishlist');
+    Route::get('/checkout', [OrderController::class,'checkOut'])->name('checkout');
+    Route::post('/cancel-discount', [AdminVoucherController::class,'cancelDiscount'])->name('cancel.discount');
+    Route::group(['prefix' => 'customer'], function () {
+        Route::get('/wishlist', [CustomerController::class,'wishlist'])->name('wishlist');
+        Route::get('/account', [CustomerController::class,'account'])->name('account');
+        Route::post('/account/{id}', [CustomerController::class,'postAccount'])->name('postAccount');
+        Route::post('/wishlist/add', [CustomerController::class,'addWishList'])->name('addwishlist');
+        Route::get('/wishlist/remove/{id_product}', [CustomerController::class,'removeWishlist'])->name('removeWishlist');
+        Route::post('/review/{id}', [CustomerController::class,'review'])->name('review');
+        Route::get('/order', [OrderController::class,'orderCustomer'])->name('orderCustomer');
+        Route::get('/orderdetail/{id}', [OrderController::class,'orderDetail'])->name('orderDetail');
+    });
+
 });
 
 Route::group(['prefix' => 'admins'], function () {
@@ -68,6 +103,25 @@ Route::group(['prefix' => 'admins'], function () {
         Route::get('logout', [AdminAuthController::class, 'logout'])->name('adminlogout');
         Route::get('/dashboard', [AdminDashboardController::class,'index'])->name('adminDashboard');
         Route::group(['middleware'=>['checkProfile']], function () {
+            Route::group(['prefix' => 'statistic'], function () {
+                Route::get('/', [StatisticController::class, 'orderStatistics'])->name('statistic');
+            });
+            Route::group(['prefix' => 'flashsale'], function () {
+                Route::get('/',[FlashSaleController::class, 'index'])->name('AdminFlashSale');
+                Route::get('/add',[FlashSaleController::class, 'add'])->name('addAdminFlashSale');
+                Route::post('/add',[FlashSaleController::class, 'postAddAdminVoucher'])->name('postAddAdminFlashSale');
+                Route::get('/edit/{id}',[FlashSaleController::class, 'edit'])->name('editAdminFlashSale');
+                Route::post('/edit/{id}',[FlashSaleController::class, 'postEditVoucher'])->name('postEditAdminFlashSale');
+
+            });
+            Route::group(['prefix' => 'voucher'], function () {
+                Route::get('/',[AdminVoucherController::class, 'index'])->name('AdminVoucher');
+                Route::get('/add',[AdminVoucherController::class, 'add'])->name('addAdminVoucher');
+                Route::post('/add',[AdminVoucherController::class, 'postAddAdminVoucher'])->name('postAddAdminVoucher');
+                Route::get('/edit/{id}',[AdminVoucherController::class, 'edit'])->name('editVoucher');
+                Route::post('/edit/{id}',[AdminVoucherController::class, 'postEditVoucher'])->name('postEditVoucher');
+
+            });
             Route::group(['prefix' => 'attribute'], function () {
                 Route::get('/', [AdminAttributeController::class,'getAttribute'])->name('adminAttribute');
                 Route::get('/add', [AdminAttributeController::class,'addAttribute'])->name('addAttribute');
@@ -198,7 +252,7 @@ Route::group(['prefix' => 'admins'], function () {
             Route::get('/', [AdminOrderController::class,'getOrder'])->name('adminOrder');
             Route::get('/edit/{id}', [AdminOrderController::class,'editOrder'])->name('editOrder');
             Route::post('/edit/{id}', [AdminOrderController::class,'postEditOrder']);
-            Route::get('/delete/{id}', [AdminOrderController::class,'getOrder'])->name('deleteOrder');
+            Route::get('/delete/{id}', [AdminOrderController::class,'deleteOrder'])->name('deleteOrder');
         });
     });
 });

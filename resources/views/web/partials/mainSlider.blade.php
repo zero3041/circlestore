@@ -12,7 +12,7 @@
                                 <div class="text-content flexcol">
                                     <h4>{{ $value['text1'] }}</h4>
                                     <h2><span>{{ $value['text2'] }}</span><br><span>{{ $value['text3'] }}</span></h2>
-                                    <a href="#" class="primary-button">Mua Ngay</a>
+{{--                                    <a href="#" class="primary-button">Mua Ngay</a>--}}
                                 </div>
                             </div>
                         </div>
